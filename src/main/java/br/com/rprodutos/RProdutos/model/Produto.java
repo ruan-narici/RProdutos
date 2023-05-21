@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,10 +22,14 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String urlImagem;
+	@Enumerated(EnumType.STRING)
+	private Categoria categoria;
+	private String urlPrimeiraImagem;
+	private String urlSegundaImagem;
+	private String urlTerceiraImagem;
 	private BigDecimal valor;
 	private Integer avaliacao = 0;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Usuario usuario;
@@ -44,12 +50,28 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public String getUrlImagem() {
-		return urlImagem;
+	public String getUrlPrimeiraImagem() {
+		return urlPrimeiraImagem;
 	}
 
-	public void setUrlImagem(String urlImagem) {
-		this.urlImagem = urlImagem;
+	public void setUrlPrimeiraImagem(String urlPrimeiraImagem) {
+		this.urlPrimeiraImagem = urlPrimeiraImagem;
+	}
+
+	public String getUrlSegundaImagem() {
+		return urlSegundaImagem;
+	}
+
+	public void setUrlSegundaImagem(String urlSegundaImagem) {
+		this.urlSegundaImagem = urlSegundaImagem;
+	}
+
+	public String getUrlTerceiraImagem() {
+		return urlTerceiraImagem;
+	}
+
+	public void setUrlTerceiraImagem(String urlTerceiraImagem) {
+		this.urlTerceiraImagem = urlTerceiraImagem;
 	}
 
 	public BigDecimal getValor() {
@@ -66,6 +88,22 @@ public class Produto {
 
 	public void setAvaliacao(Integer avaliacao) {
 		this.avaliacao = avaliacao;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }
