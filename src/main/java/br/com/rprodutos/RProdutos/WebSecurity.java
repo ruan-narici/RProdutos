@@ -27,13 +27,19 @@ public class WebSecurity {
 				.requestMatchers("/api/**").permitAll()
 				.anyRequest().authenticated()
 			)
+		
 			.csrf().disable()
 			
 			.formLogin((form) -> form
 				.loginPage("/entrar")
 				.defaultSuccessUrl("/principal", true)
 				.permitAll()
-			);
+			)
+			
+			.logout((logout -> logout
+				.logoutUrl("/sair")
+				.logoutSuccessUrl("/inicio")
+			));
 
 		return http.build();
 	}

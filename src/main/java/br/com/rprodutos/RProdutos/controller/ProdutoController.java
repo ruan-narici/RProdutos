@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/cadastrar")
-public class CadastrarController {
+@RequestMapping("/produto")
+public class ProdutoController {
 
-	@GetMapping
-	public ModelAndView viewCadastrar() {
-		return new ModelAndView("view/usuario/cadastrar");
+	@GetMapping("/cadastrar")
+	public ModelAndView cadastrar() {
+		return new ModelAndView("view/produto/novoProduto");
 	}
 
 }
