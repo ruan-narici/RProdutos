@@ -10,7 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class CadastrarController {
 
 	@GetMapping
-	public ModelAndView cadastrar() {
+	public ModelAndView viewCadastrar() {
 		return new ModelAndView("view/usuario/cadastrar");
 	}
+
 }

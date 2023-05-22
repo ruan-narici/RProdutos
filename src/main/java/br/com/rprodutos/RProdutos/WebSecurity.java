@@ -24,6 +24,7 @@ public class WebSecurity {
 				.requestMatchers("/entrar").permitAll()
 				.requestMatchers("/inicio").permitAll()
 				.requestMatchers("/cadastrar").permitAll()
+				.requestMatchers("/api/**").permitAll()
 				.anyRequest().authenticated()
 			)
 			.csrf().disable()
