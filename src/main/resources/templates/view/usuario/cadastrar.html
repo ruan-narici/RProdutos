@@ -11,18 +11,18 @@
                 <div class="p-3 w-50 mt-5 border border-2 rounded">
                     <h1 class="mb-4">Cadastrar</h1>
                     <div id="cadastro">
-                    	<form action="/inicio" id="meuForm">
-                        <label class="form-label" for="usuario">Usuário: </label>
-                        <input class="form-control border border-2" type="text" id="usuario" required>
-                        <label class="form-label" for="senha">Senha: </label>
-                        <input class="form-control border border-2" type="password" id="senha" required>
-						<label class="form-label" for="confirmarSenha">Confirmar senha: </label>
-                        <input class="form-control border border-2" type="password" id="confirmarSenha" required>
-                        <div class="form-text d-flex align-self-center gap-2">
-                            <input type="checkbox" id="checkbox" required>
-							<label for="checkbox">Concordar com os termos de uso.</label>
-                        </div>
-                        <button v-on:click="validarCampos()" class="mt-3 btn btn-secondary" type="submit" style="width: 100%;">Cadastrar</button>
+                    	<form action="/inicio" id="meuForm" @submit.prevent="cadastrarUsuario(usuario)">
+	                        <label class="form-label" for="usuario">Usuário: </label>
+	                        <input class="form-control border border-2" type="text" id="usuario" v-model="usuario.username" required>
+	                        <label class="form-label" for="senha">Senha: </label>
+	                        <input class="form-control border border-2" type="password" id="senha" required>
+							<label class="form-label" for="confirmarSenha">Confirmar senha: </label>
+	                        <input class="form-control border border-2" type="password" id="confirmarSenha" v-model="usuario.password" required>
+	                        <div class="form-text d-flex align-self-center gap-2">
+	                            <input type="checkbox" id="checkbox" required>
+								<label for="checkbox">Concordar com os termos de uso.</label>
+	                        </div>
+	                        <button  class="mt-3 btn btn-secondary" type="submit" style="width: 100%;">Cadastrar</button>
                     	</form>
                     </div>
                 </div>
@@ -46,15 +46,20 @@
 		  createApp({
 		    data() {
 		      return {
+		    	  usuario: []
 		        
 		      }
 		    },
 		    mounted() {
+		    	usuario = {
+		    			username: "",
+		    			password: ""
+		    	}
 		    	
 		    },
 		    methods: {
 		    	
-		    	validarCampos: function() {
+		    	cadastrarUsuario: function(usuario) {
 		    		const us = document.querySelector('#usuario');
 		    		const s1 = document.querySelector('#senha');
 		    		const s2 = document.querySelector('#confirmarSenha');
@@ -69,8 +74,8 @@
 			    		} else {
 		    		    	axios
 				    		.post('http://localhost:8080/api/usuario/cadastrar', {
-				    			username: us.value,
-				    			password: s1.value
+				    			username: usuario.username,
+				    			password: usuario.password
 				    		}) 
 				    		.then(() => {
 				    			alert('Cadastro efetuado com sucesso!');

@@ -18,4 +18,9 @@ public class UsuarioController {
 	public ModelAndView entrar() {
 		return new ModelAndView("view/usuario/entrar");
 	}
+	
+	@GetMapping("/perfil/meus-produtos")
+	public ModelAndView meusProdutos() {
+		return new ModelAndView("view/usuario/meuProduto");
+	}
 }

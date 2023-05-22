@@ -7,38 +7,69 @@
 	<header th:replace="~{base :: header()}"></header>
 	<main>
         <div class="container mb-5">
-            <div>
-                <h1 class="mt-5 mb-4">Categoria</h1>
-                <div class="card border border-2" style="width: 18rem;">
-                    <img src="https://img.freepik.com/fotos-premium/renderizacao-3d-de-um-carro-generico-sem-marca-em-um-ambiente-de-estudio-branco_101266-12914.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="mb-2">
-                            <i class="bi bi-star-fill" style="color: orange;"></i>
-                            <i class="bi bi-star-fill" style="color: orange;"></i>
-                            <i class="bi bi-star-fill" style="color: orange;"></i>
-                            <i class="bi bi-star"></i>
-                            <i class="bi bi-star"></i>
-                        </div>
-                        <h5 class="card-title">Card title</h5>
-                        <div class="d-flex justify-content-between">
-                            <span class="card-text fw-bold fs-5">R$0.000,00</span>
-                            <button class="btn btn-outline-danger">
-                                <!-- <i class="bi bi-heart"></i> -->
-                                <i class="bi bi-heart-fill"></i>
-                            </button>
-                        </div>
-                        <div class="d-flex justify-content-center mt-3">
-                            <button class="btn btn-danger py-2" style="width: 100%;">Comprar</button>  
-                        </div>
-                    </div>
-                </div>
-            </div>
+	        <div id="listaProduto">
+	        	<div v-for="p in produto">
+	        		<div>
+		                <h1 class="mt-5 mb-4">{{p.categoria}}</h1>
+		                <div class="card border border-2" style="width: 18rem;">
+			                <div class="d-flex justify-content-center py-2">
+			                	<img v-bind:src="p.urlPrimeiraImagem" class="card-img-top" alt="..." style="width: 200px;">
+			                </div>
+		                    <div class="card-body">
+		                        <div class="mb-2">
+		                            <i class="bi bi-star-fill" style="color: orange;"></i>
+		                            <i class="bi bi-star-fill" style="color: orange;"></i>
+		                            <i class="bi bi-star-fill" style="color: orange;"></i>
+		                            <i class="bi bi-star"></i>
+		                            <i class="bi bi-star"></i>
+		                        </div>
+		                        <h5 class="card-title">{{p.nome}}</h5>
+		                        <div class="d-flex justify-content-between">
+		                            <span class="card-text fw-bold fs-5">R${{p.valor}}</span>
+		                            <button class="btn btn-outline-danger">
+		                                <!-- <i class="bi bi-heart"></i> -->
+		                                <i class="bi bi-heart-fill"></i>
+		                            </button>
+		                        </div>
+		                        <div class="d-flex justify-content-center mt-3">
+		                            <button class="btn btn-danger py-2" style="width: 100%;">Comprar</button>  
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+	        	</div>
+	        </div>
+            
         </div>
 	</main>
 	<footer th:replace="~{base :: footer()}"></footer>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 		crossorigin="anonymous"></script>
+	
+	<script>
+		const { createApp } = Vue
+	
+		  createApp({
+		    data() {
+		      return {
+		        produto: []
+		      }
+		    },
+		    mounted() {
+		    	axios
+		    	.get('http://localhost:8080/api/produto/todos')
+		    	.then(response => {
+		    		this.produto = response.data;
+		    	})
+		    },
+		    methods: {
+		    	
+		    }
+		  }).mount('#listaProduto')
+	</script>
 </body>
 
 </html>

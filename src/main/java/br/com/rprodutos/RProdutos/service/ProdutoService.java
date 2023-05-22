@@ -4,6 +4,9 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.rprodutos.RProdutos.dto.NovoProdutoDTO;
@@ -39,6 +42,18 @@ public class ProdutoService {
 	}
 
 	public List<Produto> listarTodos() {
-		return produtoRepository.findAll();
+		Sort sort = Sort.by("categoria").descending();
+		
+		PageRequest page = PageRequest.of(0, 10, sort);
+		
+		return produtoRepository.findByPage(page);
+	}
+	
+	public List<Produto> listarPorUsuario(Principal usuario) {
+		return produtoRepository.findByUsuario(usuario.getName());
+	}
+	
+	public void excluir(Long id) {
+		produtoRepository.deleteById(id);
 	}
 }

@@ -9,7 +9,7 @@
         <div class="container mb-5">
         	<h1 class="mt-5 mb-4">Novo produto</h1>
         	<div id="novoProduto">
-        		<form action="/principal" id="form">
+        		<form action="/perfil/meus-produtos" id="form" @submit.prevent="novoProduto(produto)">
 	            <div>  
 	                <div class="row">
 	                    <div class="col">
@@ -43,7 +43,7 @@
 	                <input class="form-control border border-2" type="text" id="imagemProduto2" required v-model="produto.urlSegundaImagem">
 	                <label class="form-label" for="imagemProduto3">3ª Imagem do produto: </label>
 	                <input class="form-control border border-2" type="text" id="imagemProduto3" required v-model="produto.urlTerceiraImagem">
-	                <button class="mt-3 btn btn-secondary" type="submit" style="width: 20%;" v-on:click="novoProduto(produto)">Cadastrar</button>
+	                <button class="mt-3 btn btn-secondary" type="submit" style="width: 20%;">Cadastrar</button>
 	            </div>
 	           </form>
         	</div>
