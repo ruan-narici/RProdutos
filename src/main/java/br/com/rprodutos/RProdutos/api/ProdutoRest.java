@@ -32,6 +32,12 @@ public class ProdutoRest {
 		produtos.sort((o1, o2) -> o1.getCategoria().toString().compareTo(o2.getCategoria().toString()));
 		return new ResponseEntity<List<Produto>>(produtos, HttpStatusCode.valueOf(200));
 	}
+	
+	@GetMapping("/recentes")
+	public ResponseEntity<List<Produto>> novos() {
+		List<Produto> produtos = produtoService.listarNovos();
+		return new ResponseEntity<List<Produto>>(produtos, HttpStatusCode.valueOf(200));
+	}
 
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Produto> cadastrar(@RequestBody NovoProdutoDTO novoProdutoDTO, Principal principal) {

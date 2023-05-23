@@ -61,11 +61,11 @@
 		      }
 		    },
 		    mounted() {
-		    	axios
-		    	.get('http://localhost:8080/api/produto/todos')
-		    	.then(response => {
-		    		this.produto = response.data;
-		    	})
+	    		axios
+	    		.get('http://localhost:8080/api/produto/recentes')
+	    		.then(response => {
+	    			this.produto = response.data;
+	    		})
 		    },
 		    methods: {
 

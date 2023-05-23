@@ -6,11 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/principal")
+@RequestMapping
 public class PrincipalController {
 
-	@GetMapping
+	@GetMapping("/principal")
 	public ModelAndView principalPadrao() {
 		return new ModelAndView("view/produto/listaProduto");
+	}
+	
+	@GetMapping("/recentes")
+	public ModelAndView principalRecentes() {
+		return new ModelAndView("view/produto/listaProdutoRecente");
 	}
 }

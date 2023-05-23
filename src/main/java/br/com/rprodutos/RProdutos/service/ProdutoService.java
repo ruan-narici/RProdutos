@@ -49,6 +49,14 @@ public class ProdutoService {
 		return produtoRepository.findByPage(page);
 	}
 	
+	public List<Produto> listarNovos() {
+		Sort sort = Sort.by("id").descending();
+		
+		PageRequest page = PageRequest.of(0, 5, sort);
+		
+		return produtoRepository.findByPage(page);
+	}
+	
 	public List<Produto> listarPorUsuario(Principal usuario) {
 		return produtoRepository.findByUsuario(usuario.getName());
 	}
