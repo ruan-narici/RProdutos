@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,12 @@ public class ProdutoRest {
 	public ResponseEntity<Produto> cadastrar(@RequestBody NovoProdutoDTO novoProdutoDTO, Principal principal) {
 		Produto produto = produtoService.cadastrar(novoProdutoDTO, principal);
 		return new ResponseEntity<Produto>(produto, HttpStatusCode.valueOf(201));
+	}
+	
+	@PutMapping("/atualizar/{id}")
+	public ResponseEntity<Produto> atualizar(@PathVariable(name = "id") String id, @RequestBody NovoProdutoDTO novoProdutoDTO) {
+		Produto produto = produtoService.editar(Long.parseLong(id), novoProdutoDTO);
+		return new ResponseEntity<Produto>(produto, HttpStatusCode.valueOf(200));
 	}
 	
 	@DeleteMapping("/excluir/{id}")

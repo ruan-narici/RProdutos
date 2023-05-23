@@ -26,7 +26,7 @@
 	                    <span class="fs-6 fw-bold text-uppercase">R${{p.valor}}</span>
 	                </div>
 	                <div class="col d-flex justify-content-center align-self-center">
-	                    <a class="link-primary" href="#"><i class="bi bi-pencil-square fs-5"></i></a>
+	                    <a class="link-primary" v-bind:href="'/produto/editar/' + p.id"><i class="bi bi-pencil-square fs-5"></i></a>
 	                </div>
 	                <div class="col d-flex justify-content-center align-self-center">
 	                    <a class="link-danger" href="#" v-on:click="excluir(p)"><i class="bi bi-trash fs-5"></i></a>
