@@ -65,7 +65,7 @@
 		    },
 		    mounted() {
 	    		axios
-	    		.get('http://localhost:8080/api/produto/recentes')
+	    		.get('http://localhost:8080/api/produto/avaliacoes')
 	    		.then(response => {
 	    			this.produto = response.data;
 	    		})

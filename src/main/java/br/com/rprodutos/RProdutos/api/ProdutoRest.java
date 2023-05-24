@@ -39,6 +39,12 @@ public class ProdutoRest {
 		List<Produto> produtos = produtoService.listarNovos();
 		return new ResponseEntity<List<Produto>>(produtos, HttpStatusCode.valueOf(200));
 	}
+	
+	@GetMapping("/avaliacoes")
+	public ResponseEntity<List<Produto>> melhoresAvaliacoes() {
+		List<Produto> produtos = produtoService.listarMelhoresAvaliados();
+		return new ResponseEntity<List<Produto>>(produtos, HttpStatusCode.valueOf(200));
+	}
 
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Produto> cadastrar(@RequestBody NovoProdutoDTO novoProdutoDTO, Principal principal) {
@@ -56,6 +62,12 @@ public class ProdutoRest {
 	public ResponseEntity<HttpStatusCode> excluir(@PathVariable(name = "id") String id) {
 		produtoService.excluir(Long.parseLong(id));
 		return new ResponseEntity<HttpStatusCode>(HttpStatusCode.valueOf(204));
+	}
+	
+	@PutMapping("/avaliar/{id}/{avaliacao}")
+	public ResponseEntity<Produto> avaliar(@PathVariable(name = "id") Long id, @PathVariable(name = "avaliacao") Integer avaliacao) {
+		Produto produto = produtoService.avaliar(id, avaliacao);
+		return new ResponseEntity<Produto>(produto, HttpStatusCode.valueOf(201));
 	}
 
 }

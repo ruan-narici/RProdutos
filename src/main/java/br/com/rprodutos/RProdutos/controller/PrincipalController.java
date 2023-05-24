@@ -18,4 +18,9 @@ public class PrincipalController {
 	public ModelAndView principalRecentes() {
 		return new ModelAndView("view/produto/listaProdutoRecente");
 	}
+	
+	@GetMapping("/avaliacoes")
+	public ModelAndView principalAvaliacoes() {
+		return new ModelAndView("view/produto/listaProdutoAvaliacao");
+	}
 }

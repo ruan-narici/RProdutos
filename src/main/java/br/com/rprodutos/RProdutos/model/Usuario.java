@@ -1,5 +1,6 @@
 package br.com.rprodutos.RProdutos.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,9 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,10 +21,18 @@ public class Usuario {
 	private String password;
 	private Boolean enabled;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<Produto> carrinho;
-	
+	private List<Produto> favoritos = new ArrayList<>();
+
+	public List<Produto> getFavoritos() {
+		return favoritos;
+	}
+
+	public void setFavoritos(List<Produto> favoritos) {
+		this.favoritos = favoritos;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -49,11 +57,4 @@ public class Usuario {
 		this.enabled = enabled;
 	}
 
-	public List<Produto> getCarrinho() {
-		return carrinho;
-	}
-
-	public void setCarrinho(List<Produto> carrinho) {
-		this.carrinho = carrinho;
-	}
 }

@@ -1,9 +1,12 @@
 package br.com.rprodutos.RProdutos.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -11,6 +14,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -29,7 +33,13 @@ public class Produto {
 	private String urlTerceiraImagem;
 	private BigDecimal valor;
 	private Integer avaliacao = 0;
+	private Integer totalAvaliacao = 0;
+	private Integer contadorAvaliacao = 0;
 
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "favoritos")
+	@JsonIgnore
+	private List<Usuario> favoritos = new ArrayList<>();
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Usuario usuario;
@@ -85,9 +95,16 @@ public class Produto {
 	public Integer getAvaliacao() {
 		return avaliacao;
 	}
-
+	
 	public void setAvaliacao(Integer avaliacao) {
 		this.avaliacao = avaliacao;
+	}
+	
+	public void gerarAvaliacao(Integer avaliacao) {
+		this.contadorAvaliacao ++;
+		this.totalAvaliacao += avaliacao;
+		Double media = (double) (this.totalAvaliacao / this.contadorAvaliacao);
+		this.avaliacao = (int) Math.round(media);
 	}
 
 	public Usuario getUsuario() {
@@ -104,6 +121,30 @@ public class Produto {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+	
+	public Integer getTotalAvaliacoes() {
+		return contadorAvaliacao;
+	}
+
+	public void setTotalAvaliacoes(Integer totalAvaliacoes) {
+		this.contadorAvaliacao = totalAvaliacoes;
+	}
+	
+	public Integer getContadorAvaliacao() {
+		return contadorAvaliacao;
+	}
+
+	public void setContadorAvaliacao(Integer contadorAvaliacao) {
+		this.contadorAvaliacao = contadorAvaliacao;
+	}
+
+	public Integer getTotalAvaliacao() {
+		return totalAvaliacao;
+	}
+
+	public void setTotalAvaliacao(Integer totalAvaliacao) {
+		this.totalAvaliacao = totalAvaliacao;
 	}
 
 }

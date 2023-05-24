@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import br.com.rprodutos.RProdutos.dto.NovoProdutoDTO;
 import br.com.rprodutos.RProdutos.model.Categoria;
 import br.com.rprodutos.RProdutos.model.Produto;
+import br.com.rprodutos.RProdutos.model.Usuario;
 import br.com.rprodutos.RProdutos.repository.ProdutoRepository;
 import br.com.rprodutos.RProdutos.repository.UsuarioRepository;
 
@@ -57,6 +58,14 @@ public class ProdutoService {
 		return produtoRepository.findByPage(page);
 	}
 	
+	public List<Produto> listarMelhoresAvaliados() {
+		Sort sort = Sort.by("avaliacao").descending();
+		
+		PageRequest page = PageRequest.of(0, 5, sort);
+		
+		return produtoRepository.findByPage(page);
+	}
+	
 	public List<Produto> listarPorUsuario(Principal usuario) {
 		return produtoRepository.findByUsuario(usuario.getName());
 	}
@@ -80,6 +89,13 @@ public class ProdutoService {
 	
 	public void excluir(Long id) {
 		produtoRepository.deleteById(id);
+	}
+	
+	public Produto avaliar(Long id, Integer avaliacao) {
+		Produto produto = produtoRepository.findById(id).get();
+		produto.gerarAvaliacao(avaliacao);
+		produtoRepository.save(produto);
+		return produto;
 	}
 	
 }
