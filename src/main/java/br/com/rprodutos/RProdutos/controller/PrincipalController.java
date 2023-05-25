@@ -23,4 +23,9 @@ public class PrincipalController {
 	public ModelAndView principalAvaliacoes() {
 		return new ModelAndView("view/produto/listaProdutoAvaliacao");
 	}
+	
+	@GetMapping("/favoritos")
+	public ModelAndView principalFavoritos() {
+		return new ModelAndView("view/produto/listaProdutoFavorito");
+	}
 }

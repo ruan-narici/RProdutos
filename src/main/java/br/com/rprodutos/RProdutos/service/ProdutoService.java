@@ -53,7 +53,7 @@ public class ProdutoService {
 	public List<Produto> listarNovos() {
 		Sort sort = Sort.by("id").descending();
 		
-		PageRequest page = PageRequest.of(0, 5, sort);
+		PageRequest page = PageRequest.of(0, 10, sort);
 		
 		return produtoRepository.findByPage(page);
 	}
@@ -61,7 +61,7 @@ public class ProdutoService {
 	public List<Produto> listarMelhoresAvaliados() {
 		Sort sort = Sort.by("avaliacao").descending();
 		
-		PageRequest page = PageRequest.of(0, 5, sort);
+		PageRequest page = PageRequest.of(0, 10, sort);
 		
 		return produtoRepository.findByPage(page);
 	}
