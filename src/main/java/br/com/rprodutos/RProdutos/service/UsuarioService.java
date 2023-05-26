@@ -62,4 +62,9 @@ public class UsuarioService {
 		return usuario;
 	}
 	
+	public Usuario getUsuarioLogado(Principal principal) {
+		Usuario usuario = usuarioRepository.findById(principal.getName()).get();
+		return usuario;
+	}
+	
 }

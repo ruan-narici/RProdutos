@@ -5,7 +5,7 @@
 
 <body class="bg-light" onload="onLoad()">
 <div id="atualizarProduto">
-	<header th:replace="~{base :: header()}"></header>
+	<header th:replace="~{base :: header(true)}"></header>
 	<main>
         <div class="container mb-5">
             <h1 class="mt-5 mb-4">Atualizar produto</h1>
@@ -65,11 +65,13 @@
 			  createApp({
 			    data() {
 			      return {
-
+					us: []
 			      }
 			    },
 			    mounted() {
-
+			    	axios
+			    	.get("http://localhost:8080/api/usuario/owner")
+			    	.then(response => this.us = response.data)
 			    },
 			    methods: {
 			    	atualizarP: function(){

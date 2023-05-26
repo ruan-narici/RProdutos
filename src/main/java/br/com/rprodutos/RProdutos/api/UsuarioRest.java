@@ -62,4 +62,10 @@ public class UsuarioRest {
 		List<Produto> produtos = usuario.getFavoritos();
 		return new ResponseEntity<List<Produto>>(produtos, HttpStatusCode.valueOf(200));
 	}
+	
+	@GetMapping("/owner")
+	public ResponseEntity<Usuario> getUsuarioLogado(Principal principal) {
+		Usuario usuario = usuarioService.getUsuarioLogado(principal);
+		return new ResponseEntity<Usuario>(usuario, HttpStatusCode.valueOf(200));
+	}
 }

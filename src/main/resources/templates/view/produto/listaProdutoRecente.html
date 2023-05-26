@@ -5,7 +5,7 @@
 
 <body class="bg-light" onload="onLoad()">
 <div id="listaProduto">
-	<header th:replace="~{base :: header()}"></header>
+	<header th:replace="~{base :: header(true)}"></header>
 	<main>
         <div class="container mb-5">
 	        	<h1 class="mt-5 mb-4">RECENTES</h1>
@@ -25,7 +25,7 @@
 		                        </div>
 		                        <h5 class="card-title">{{p.nome}}</h5>
 		                        <div class="d-flex justify-content-between">
-		                            <span class="card-text fw-bold fs-5">R${{p.valor}}</span>
+		                            <span class="card-text fw-bold fs-5">R${{  formatarReal(p.valor)  }}</span>
 		                            
 		                            <div>
 			                            <button class="btn btn-outline-danger" disabled>
@@ -63,7 +63,8 @@
 		    data() {
 		      return {
 		        produto: [],
-		      	favoritos: []
+		      	favoritos: [],
+		      	us: []
 		      }
 		    },
 		    mounted() {
@@ -76,11 +77,17 @@
 		    	.get('http://localhost:8080/api/usuario/favoritos')
 		    	.then(response => {
 		    		this.favoritos = response.data;
-		    	})
+		    	}),
+		    	axios
+		    	.get('http://localhost:8080/api/usuario/owner')
+		    	.then(response => this.us = response.data)
 		    },
 		    methods: {
 				verificaFavorito: function(item) {
 					return this.favoritos.some(fav => fav.id === item.id)
+				},
+				formatarReal: function(valor) {
+					return valor.toFixed(2).replace('.', ',');
 				}
 		    }
 		  }).mount('#listaProduto')

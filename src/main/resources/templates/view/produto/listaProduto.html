@@ -5,9 +5,10 @@
 
 <body class="bg-light" onload="onLoad()">
 <div id="listaProduto">
-	<header th:replace="~{base :: header()}"></header>
+	<header th:replace="~{base :: header(true)}"></header>
 	<main>
         <div class="container mb-5">
+        <span></span>
 	        	<div v-for="(group, category) in groupedItems" :key="category">
 	        	
 	        		<h1 class="mt-5 mb-4">{{ category }}</h1>
@@ -27,7 +28,7 @@
 		                        </div>
 		                        <h5 class="card-title">{{item.nome}}</h5>
 		                        <div class="d-flex justify-content-between">
-		                            <span class="card-text fw-bold fs-5">R${{item.valor}}</span>
+		                            <span class="card-text fw-bold fs-5">R${{  formatarReal(item.valor)  }}</span>
                             
 		                            <div>
 			                            <button class="btn btn-outline-danger" disabled>
@@ -68,6 +69,7 @@
 		      return {
 		        produto: [],
 		      	favoritos: [],
+		      	us: []
 		      }
 		    },
 		    mounted() {
@@ -80,11 +82,17 @@
 		    	.get('http://localhost:8080/api/usuario/favoritos')
 		    	.then(response => {
 		    		this.favoritos = response.data;
-		    	})
+		    	}),
+		    	axios
+		    	.get('http://localhost:8080/api/usuario/owner')
+		    	.then(response => this.us = response.data)
 		    },
 		    methods: {
 				verificaFavorito: function(item) {
 					return this.favoritos.some(fav => fav.id === item.id)
+				},
+				formatarReal: function(valor) {
+					return valor.toFixed(2).replace('.', ',');
 				}
 		    },
 		    computed: {

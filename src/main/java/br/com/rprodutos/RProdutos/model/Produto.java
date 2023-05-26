@@ -36,7 +36,7 @@ public class Produto {
 	private Integer totalAvaliacao = 0;
 	private Integer contadorAvaliacao = 0;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "favoritos")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "favoritos", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Usuario> favoritos = new ArrayList<>();
 	

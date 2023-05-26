@@ -4,11 +4,12 @@
 <head th:replace="~{base :: head('RProdutos | NOVO PRODUTO')}"></head>
 
 <body class="bg-light" onload="onLoad()">
-	<header th:replace="~{base :: header()}"></header>
+<div id="novoProduto">
+	<header th:replace="~{base :: header(true)}"></header>
 	<main>
         <div class="container mb-5">
         	<h1 class="mt-5 mb-4">Novo produto</h1>
-        	<div id="novoProduto">
+        	
         		<form action="/perfil/meus-produtos" id="form" @submit.prevent="novoProduto(produto)">
 	            <div>  
 	                <div class="row">
@@ -64,7 +65,8 @@
 			  createApp({
 			    data() {
 			      return {
-			        produto : []
+			        produto : [],
+			        us: []
 			      }
 			    },
 			    mounted() {
@@ -75,7 +77,10 @@
 			            "urlSegundaImagem": "",
 			            "urlTerceiraImagem": "",
 			            "valor": ""
-			        }
+			        },
+			    	axios
+			    	.get("http://localhost:8080/api/usuario/owner")
+			    	.then(response => this.us = response.data)
 			    },
 			    methods: {
 			    	novoProduto: function(produto) {

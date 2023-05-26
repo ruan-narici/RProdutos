@@ -3,8 +3,9 @@
 
 <head th:replace="~{base :: head('RProdutos | MEUS PRODUTOS')}"></head>
 
-<body class="bg-light" >
-	<header th:replace="~{base :: header()}"></header>
+<body class="bg-light" onload="onLoad()">
+<div id="meusProdutos">
+	<header th:replace="~{base :: header(true)}"></header>
 	<main>
         <div class="container mb-5">
             <div class="my-5">
@@ -13,7 +14,7 @@
                     <span>Meus produtos</span>
                 </p>
             </div>
-            <div id="meusProdutos">
+            
             	<div v-for="p in produto">
             		<div class="row py-3 border border-2 border-end-0 border-start-0 border-bottom-0">
 	                <div class="col-2 d-flex justify-content-center align-self-center">
@@ -23,7 +24,7 @@
 	                    <span class="fs-6 fw-bold text-uppercase">{{p.nome}}</span> 
 	                </div>
 	                <div class="col d-flex justify-content-center align-self-center">
-	                    <span class="fs-6 fw-bold text-uppercase">R${{p.valor}}</span>
+	                    <span class="fs-6 fw-bold text-uppercase">R${{  formatarReal(p.valor)  }}</span>
 	                </div>
 	                <div class="col d-flex justify-content-center align-self-center">
 	                    <a class="link-primary" v-bind:href="'/produto/editar/' + p.id"><i class="bi bi-pencil-square fs-5"></i></a>
@@ -44,18 +45,25 @@
 		crossorigin="anonymous"></script>
 	
 	<script>
+	function onLoad() {
 		const { createApp } = Vue
-	
+		
 		  createApp({
 		    data() {
 		      return {
-		        produto: []
+		        produto: [],
+		        us: []
 		      }
 		    },
 		    mounted() {
 		    	axios
 		    	.get("http://localhost:8080/api/usuario/meus-produtos")
-		    	.then(response => this.produto = response.data)
+		    	.then(response => {
+		    		this.produto = response.data
+		    	}),
+		    	axios
+		    	.get("http://localhost:8080/api/usuario/owner")
+		    	.then(response => this.us = response.data)
 		    },
 		    methods: {
 		    	excluir: function(produto) {
@@ -65,9 +73,14 @@
 		    			alert('Produto excluido com sucesso!');
 		    			location.reload();
 		    		});
-		    	}
+		    	},
+				formatarReal: function(valor) {
+					return valor.toFixed(2).replace('.', ',');
+				}
 		    }
-		  }).mount('#meusProdutos')
+		  }).mount('#meusProdutos')		
+	}
+
 	</script>
 </body>
 
