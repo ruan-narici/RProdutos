@@ -4,13 +4,13 @@
 | -------------  | --- |
 | :sparkles: Nome        | **RProdutos**
 | :label: Tecnologias | HTML, BOOTSTRAP, THYMELEAF, VUE.JS, AXIOS, JAVA e SPRING BOOT (tecnologias utilizadas)
-| :rocket: URL         | #
+| :rocket: URL         | https://youtu.be/errzOovR98E
 | :fire: Desafio     | ~~
 
 <!-- Inserir imagem com a #vitrinedev ao final do link -->
-![Ruan Narici](#vitrinedev)
+![Ruan Narici](../../../.././assets/img/preview.gif)
 <h1>
-    Assista ao funcionamento deste projeto <a href="#">aqui</a>.
+    Assista ao funcionamento deste projeto <a href="https://youtu.be/errzOovR98E">aqui</a>.
 </h1>
 
 ``` 
