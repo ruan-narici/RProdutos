@@ -23,7 +23,7 @@ public class Usuario {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<Produto> favoritos = new ArrayList<>();
+	public List<Produto> favoritos = new ArrayList<>();
 
 	public List<Produto> getFavoritos() {
 		return favoritos;

@@ -38,7 +38,7 @@ public class Produto {
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "favoritos", cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<Usuario> favoritos = new ArrayList<>();
+	private List<Usuario> usuarioFavoritos = new ArrayList<>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore

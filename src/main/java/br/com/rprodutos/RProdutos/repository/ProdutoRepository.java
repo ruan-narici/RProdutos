@@ -15,12 +15,12 @@ import br.com.rprodutos.RProdutos.model.Produto;
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 
 	@Query("SELECT p FROM Produto p JOIN p.usuario u WHERE u.username = :username")
-	@Cacheable("buscarUsuario")
+//	@Cacheable("buscarUsuario")
 	public List<Produto> findByUsuario(@Param(value = "username") String username);
 	
 	
 	@Query("SELECT p FROM Produto p")
-	@Cacheable("buscarPorPagina")
+//	@Cacheable("buscarPorPagina")
 	public List<Produto> findByPage(Pageable page);
 	
 }

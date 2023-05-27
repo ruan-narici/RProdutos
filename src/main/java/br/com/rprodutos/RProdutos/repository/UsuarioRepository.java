@@ -11,6 +11,6 @@ import br.com.rprodutos.RProdutos.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
 
-	@Cacheable("userId")
+//	@Cacheable("userId")
 	Optional<Usuario> findById(String id);
 }

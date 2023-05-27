@@ -1,6 +1,7 @@
 package br.com.rprodutos.RProdutos.service;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,12 @@ public class ProdutoService {
 	}
 	
 	public void excluir(Long id) {
+		Produto produto = produtoRepository.findById(id).get();
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		usuarios.forEach( u -> {
+			u.getFavoritos().remove(produto);
+		});
+		usuarioRepository.saveAll(usuarios);
 		produtoRepository.deleteById(id);
 	}
 	
