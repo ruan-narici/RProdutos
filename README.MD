@@ -8,7 +8,7 @@
 | :fire: Desafio     | ~~
 
 <!-- Inserir imagem com a #vitrinedev ao final do link -->
-![Ruan Narici](./assets/img/preview.gif#vitrinedev)
+![Ruan Narici](./assets/img/preview.gif)
 <h1>
     Assista ao funcionamento deste projeto <a href="https://youtu.be/errzOovR98E">aqui</a>.
 </h1>
